@@ -11,11 +11,11 @@ export const ELEMENT_DEFINITIONS = {
     width: 363,
     height: 135,
     scale: 0.41,
-    coreBox: { x: 22, y: 48, width: 316, height: 67 },
+    coreBox: { x: 14, y: 38, width: 335, height: 86 },
     juts: [
-      { name: 't', x: 26, y: 26, width: 45, height: 22 },
-      { name: 'h', x: 100, y: 22, width: 40, height: 26 },
-      { name: 'i', x: 215, y: 20, width: 25, height: 28 },
+      { name: 't', x: 31, y: 15, width: 46, height: 23 },
+      { name: 'h', x: 99, y: 11, width: 51, height: 27 },
+      { name: 'i', x: 203, y: 10, width: 46, height: 28 },
     ],
   },
   'is1': {
@@ -25,9 +25,9 @@ export const ELEMENT_DEFINITIONS = {
     width: 195,
     height: 135,
     scale: 0.41,
-    coreBox: { x: 20, y: 48, width: 150, height: 67 },
+    coreBox: { x: 10, y: 38, width: 171, height: 86 },
     juts: [
-      { name: 'i', x: 46, y: 20, width: 26, height: 28 },
+      { name: 'i', x: 39, y: 10, width: 41, height: 28 },
     ],
   },
   'the': {
@@ -37,10 +37,10 @@ export const ELEMENT_DEFINITIONS = {
     width: 284,
     height: 134,
     scale: 0.41,
-    coreBox: { x: 21, y: 48, width: 240, height: 66 },
+    coreBox: { x: 14, y: 38, width: 257, height: 86 },
     juts: [
-      { name: 't', x: 26, y: 26, width: 40, height: 22 },
-      { name: 'h', x: 100, y: 26, width: 36, height: 22 },
+      { name: 't', x: 30, y: 14, width: 47, height: 24 },
+      { name: 'h', x: 99, y: 11, width: 66, height: 27 },
     ],
   },
   'website': {
@@ -50,11 +50,11 @@ export const ELEMENT_DEFINITIONS = {
     width: 596,
     height: 135,
     scale: 0.41,
-    coreBox: { x: 20, y: 48, width: 552, height: 67 },
+    coreBox: { x: 10, y: 38, width: 573, height: 86 },
     juts: [
-      { name: 'b', x: 200, y: 22, width: 40, height: 26 },
-      { name: 'i', x: 368, y: 20, width: 26, height: 28 },
-      { name: 't', x: 450, y: 27, width: 40, height: 21 },
+      { name: 'b', x: 162, y: 11, width: 53, height: 27 },
+      { name: 'i', x: 354, y: 10, width: 47, height: 28 },
+      { name: 't', x: 424, y: 15, width: 43, height: 23 },
     ],
   },
   'of': {
@@ -64,9 +64,9 @@ export const ELEMENT_DEFINITIONS = {
     width: 204,
     height: 133,
     scale: 0.41,
-    coreBox: { x: 20, y: 48, width: 152, height: 66 },
+    coreBox: { x: 10, y: 38, width: 180, height: 86 },
     juts: [
-      { name: 'f', x: 125, y: 25, width: 40, height: 23 },
+      { name: 'f', x: 112, y: 10, width: 72, height: 28 },
     ],
   },
 
@@ -78,13 +78,13 @@ export const ELEMENT_DEFINITIONS = {
     width: 1947,
     height: 340,
     scale: 0.41,
-    coreBox: { x: 40, y: 80, width: 1867, height: 180 },
+    coreBox: { x: 20, y: 56, width: 1906, height: 219 },
     juts: [
-      { name: 'j_desc', x: 40, y: 260, width: 135, height: 40 },
-      { name: 'j_dot', x: 82, y: 40, width: 94, height: 40 },
-      { name: 'q_desc', x: 655, y: 260, width: 133, height: 35 },
-      { name: 'l', x: 1215, y: 40, width: 110, height: 40 },
-      { name: 'i', x: 1368, y: 40, width: 96, height: 40 },
+      { name: 'j_desc', x: 30, y: 275, width: 154, height: 44 },
+      { name: 'j_dot', x: 71, y: 20, width: 117, height: 36 },
+      { name: 'q_desc', x: 638, y: 275, width: 161, height: 39 },
+      { name: 'l', x: 1198, y: 20, width: 135, height: 36 },
+      { name: 'i', x: 1359, y: 20, width: 113, height: 36 },
     ],
   },
 
@@ -96,10 +96,10 @@ export const ELEMENT_DEFINITIONS = {
     width: 1151,
     height: 341,
     scale: 0.41,
-    coreBox: { x: 40, y: 80, width: 1070, height: 180 },
+    coreBox: { x: 20, y: 56, width: 1110, height: 219 },
     juts: [
-      { name: 'h', x: 250, y: 40, width: 100, height: 40 },
-      { name: 'g_desc', x: 920, y: 260, width: 190, height: 40 },
+      { name: 'h', x: 213, y: 20, width: 147, height: 36 },
+      { name: 'g_desc', x: 895, y: 275, width: 221, height: 45 },
     ],
   },
 
@@ -111,9 +111,9 @@ export const ELEMENT_DEFINITIONS = {
     width: 285,
     height: 134,
     scale: 0.41,
-    coreBox: { x: 25, y: 48, width: 233, height: 66 },
+    coreBox: { x: 13, y: 38, width: 260, height: 86 },
     juts: [
-      { name: 'd', x: 200, y: 21, width: 36, height: 27 },
+      { name: 'd', x: 201, y: 11, width: 65, height: 27 },
     ],
   },
   'it': {
@@ -123,10 +123,10 @@ export const ELEMENT_DEFINITIONS = {
     width: 193,
     height: 135,
     scale: 0.41,
-    coreBox: { x: 20, y: 48, width: 153, height: 67 },
+    coreBox: { x: 10, y: 38, width: 172, height: 86 },
     juts: [
-      { name: 'i', x: 46, y: 20, width: 26, height: 28 },
-      { name: 't', x: 120, y: 27, width: 36, height: 21 },
+      { name: 'i', x: 39, y: 10, width: 41, height: 28 },
+      { name: 't', x: 103, y: 15, width: 44, height: 23 },
     ],
   },
   'is2': {
@@ -136,9 +136,9 @@ export const ELEMENT_DEFINITIONS = {
     width: 195,
     height: 135,
     scale: 0.41,
-    coreBox: { x: 20, y: 48, width: 150, height: 67 },
+    coreBox: { x: 10, y: 38, width: 171, height: 86 },
     juts: [
-      { name: 'i', x: 46, y: 20, width: 26, height: 28 },
+      { name: 'i', x: 39, y: 10, width: 41, height: 28 },
     ],
   },
   'still': {
@@ -148,12 +148,12 @@ export const ELEMENT_DEFINITIONS = {
     width: 435,
     height: 136,
     scale: 0.41,
-    coreBox: { x: 23, y: 48, width: 392, height: 68 },
+    coreBox: { x: 13, y: 38, width: 410, height: 86 },
     juts: [
-      { name: 't', x: 90, y: 28, width: 40, height: 20 },
-      { name: 'i', x: 211, y: 21, width: 25, height: 27 },
-      { name: 'l1', x: 285, y: 23, width: 30, height: 25 },
-      { name: 'l2', x: 365, y: 23, width: 30, height: 25 },
+      { name: 't', x: 104, y: 16, width: 51, height: 22 },
+      { name: 'i', x: 201, y: 11, width: 47, height: 27 },
+      { name: 'l1', x: 259, y: 12, width: 57, height: 26 },
+      { name: 'l2', x: 338, y: 12, width: 57, height: 26 },
     ],
   },
 
@@ -165,9 +165,9 @@ export const ELEMENT_DEFINITIONS = {
     width: 520,
     height: 160,
     scale: 0.42,
-    coreBox: { x: 36, y: 55, width: 437, height: 80 },
+    coreBox: { x: 13, y: 46, width: 490, height: 103 },
     juts: [
-      { name: 'd', x: 270, y: 25, width: 40, height: 30 },
+      { name: 'd', x: 224, y: 13, width: 85, height: 33 },
     ],
   },
   'construction': {
@@ -177,11 +177,11 @@ export const ELEMENT_DEFINITIONS = {
     width: 1159,
     height: 163,
     scale: 0.42,
-    coreBox: { x: 25, y: 58, width: 1100, height: 80 },
+    coreBox: { x: 13, y: 46, width: 1133, height: 103 },
     juts: [
-      { name: 't1', x: 420, y: 35, width: 40, height: 23 },
-      { name: 't2', x: 790, y: 35, width: 40, height: 23 },
-      { name: 'i', x: 886, y: 25, width: 33, height: 33 },
+      { name: 't1', x: 394, y: 20, width: 55, height: 26 },
+      { name: 't2', x: 764, y: 20, width: 55, height: 26 },
+      { name: 'i', x: 873, y: 13, width: 56, height: 33 },
     ],
   },
 

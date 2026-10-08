@@ -12,9 +12,13 @@ const CONFIG = {
   backgroundColor: '#F7E6F2',
   wallThickness: 100,
   gravityScale: 0.002,
-  wakeTimeoutMs: 5000,
+  wakeTimeoutMs: 4200,
   moveThresholdPx: 50,
   dragThresholdPx: 5,
+  positionIterations: 10,
+  velocityIterations: 8,
+  wakeVelocityX: 3,
+  wakeAngularVelocity: 0.06,
 };
 
 // State
@@ -150,6 +154,8 @@ export async function initApp() {
   // 2. Create Matter.js physics engine
   engine = Engine.create({
     gravity: { x: 0, y: 1, scale: CONFIG.gravityScale },
+    positionIterations: CONFIG.positionIterations,
+    velocityIterations: CONFIG.velocityIterations,
   });
 
   // 3. Create boundary walls
@@ -189,9 +195,15 @@ export async function initApp() {
     timeoutMs: CONFIG.wakeTimeoutMs,
     moveThreshold: CONFIG.moveThresholdPx,
     onWake: () => {
-      // Unfreeze all bodies to drop into gravity
+      // Unfreeze all bodies to drop into gravity with subtle dispersal
       for (const body of Object.values(bodiesMap)) {
         Body.setStatic(body, false);
+        // Random horizontal velocity to avoid orderly piles
+        const vx = (Math.random() - 0.5) * CONFIG.wakeVelocityX;
+        Body.setVelocity(body, { x: vx, y: body.velocity.y });
+        // Subtle random angular velocity for natural tilt
+        const va = (Math.random() - 0.5) * CONFIG.wakeAngularVelocity;
+        Body.setAngularVelocity(body, va);
       }
     },
   });

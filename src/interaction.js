@@ -3,10 +3,10 @@
  * 'Group 67' (quick links:) is intentionally omitted so it acts as an unlinked physical pill.
  */
 export const DEFAULT_PILL_LINKS = {
-  'Group 66': 'https://adoptarun.com',
+  'Group 66': 'https://adoptarun.org',
   'Group 65': '#resume',
-  'Group 68': 'https://instagram.com/jacquelinechung',
-  'Group 64': 'https://youtube.com',
+  'Group 68': 'https://instagram.com/jackie_c_',
+  'Group 64': 'https://www.youtube.com/watch?v=CRmIMcUGnLQ',
 };
 
 /**
