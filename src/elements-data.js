@@ -10,7 +10,7 @@ export const ELEMENT_DEFINITIONS = {
     svg: 'svgs/this.svg',
     width: 363,
     height: 135,
-    scale: 0.59,
+    scale: 0.41,
     coreBox: { x: 22, y: 48, width: 316, height: 67 },
     juts: [
       { name: 't', x: 26, y: 26, width: 45, height: 22 },
@@ -24,7 +24,7 @@ export const ELEMENT_DEFINITIONS = {
     svg: 'svgs/is1.svg',
     width: 195,
     height: 135,
-    scale: 0.59,
+    scale: 0.41,
     coreBox: { x: 20, y: 48, width: 150, height: 67 },
     juts: [
       { name: 'i', x: 46, y: 20, width: 26, height: 28 },
@@ -36,7 +36,7 @@ export const ELEMENT_DEFINITIONS = {
     svg: 'svgs/the.svg',
     width: 284,
     height: 134,
-    scale: 0.59,
+    scale: 0.41,
     coreBox: { x: 21, y: 48, width: 240, height: 66 },
     juts: [
       { name: 't', x: 26, y: 26, width: 40, height: 22 },
@@ -49,7 +49,7 @@ export const ELEMENT_DEFINITIONS = {
     svg: 'svgs/website.svg',
     width: 596,
     height: 135,
-    scale: 0.59,
+    scale: 0.41,
     coreBox: { x: 20, y: 48, width: 552, height: 67 },
     juts: [
       { name: 'b', x: 200, y: 22, width: 40, height: 26 },
@@ -63,7 +63,7 @@ export const ELEMENT_DEFINITIONS = {
     svg: 'svgs/of.svg',
     width: 204,
     height: 133,
-    scale: 0.59,
+    scale: 0.41,
     coreBox: { x: 20, y: 48, width: 152, height: 66 },
     juts: [
       { name: 'f', x: 125, y: 25, width: 40, height: 23 },
@@ -77,7 +77,7 @@ export const ELEMENT_DEFINITIONS = {
     svg: 'svgs/jacqueline.svg',
     width: 1947,
     height: 340,
-    scale: 0.59,
+    scale: 0.41,
     coreBox: { x: 40, y: 80, width: 1867, height: 180 },
     juts: [
       { name: 'j_desc', x: 40, y: 260, width: 135, height: 40 },
@@ -95,7 +95,7 @@ export const ELEMENT_DEFINITIONS = {
     svg: 'svgs/chung.svg',
     width: 1151,
     height: 341,
-    scale: 0.59,
+    scale: 0.41,
     coreBox: { x: 40, y: 80, width: 1070, height: 180 },
     juts: [
       { name: 'h', x: 250, y: 40, width: 100, height: 40 },
@@ -110,7 +110,7 @@ export const ELEMENT_DEFINITIONS = {
     svg: 'svgs/and.svg',
     width: 285,
     height: 134,
-    scale: 0.59,
+    scale: 0.41,
     coreBox: { x: 25, y: 48, width: 233, height: 66 },
     juts: [
       { name: 'd', x: 200, y: 21, width: 36, height: 27 },
@@ -122,7 +122,7 @@ export const ELEMENT_DEFINITIONS = {
     svg: 'svgs/it.svg',
     width: 193,
     height: 135,
-    scale: 0.59,
+    scale: 0.41,
     coreBox: { x: 20, y: 48, width: 153, height: 67 },
     juts: [
       { name: 'i', x: 46, y: 20, width: 26, height: 28 },
@@ -135,7 +135,7 @@ export const ELEMENT_DEFINITIONS = {
     svg: 'svgs/is2.svg',
     width: 195,
     height: 135,
-    scale: 0.59,
+    scale: 0.41,
     coreBox: { x: 20, y: 48, width: 150, height: 67 },
     juts: [
       { name: 'i', x: 46, y: 20, width: 26, height: 28 },
@@ -147,7 +147,7 @@ export const ELEMENT_DEFINITIONS = {
     svg: 'svgs/still.svg',
     width: 435,
     height: 136,
-    scale: 0.59,
+    scale: 0.41,
     coreBox: { x: 23, y: 48, width: 392, height: 68 },
     juts: [
       { name: 't', x: 90, y: 28, width: 40, height: 20 },
@@ -164,7 +164,7 @@ export const ELEMENT_DEFINITIONS = {
     svg: 'svgs/under.svg',
     width: 520,
     height: 160,
-    scale: 0.60,
+    scale: 0.42,
     coreBox: { x: 36, y: 55, width: 437, height: 80 },
     juts: [
       { name: 'd', x: 270, y: 25, width: 40, height: 30 },
@@ -176,7 +176,7 @@ export const ELEMENT_DEFINITIONS = {
     svg: 'svgs/construction.svg',
     width: 1159,
     height: 163,
-    scale: 0.60,
+    scale: 0.42,
     coreBox: { x: 25, y: 58, width: 1100, height: 80 },
     juts: [
       { name: 't1', x: 420, y: 35, width: 40, height: 23 },

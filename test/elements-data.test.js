@@ -29,13 +29,13 @@ test('getScaledDimensions returns scaled widths and heights matching target text
   assert.ok(Math.abs(dims['Group 64'].scaledHeight - 50) < 3, 'Group 64 height ~50px');
   assert.ok(Math.abs(dims['Group 66'].scaledHeight - 50) < 3, 'Group 66 height ~50px');
 
-  // jacqueline: width should be ~1150px, height ~200px
-  assert.ok(Math.abs(dims['jacqueline'].scaledHeight - 200) < 10, 'jacqueline height ~200px');
+  // jacqueline: width should be ~800px, height ~140px (~30% smaller than previous ~200px)
+  assert.ok(Math.abs(dims['jacqueline'].scaledHeight - 140) < 10, 'jacqueline height ~140px');
 
-  // chung: height should be ~200px
-  assert.ok(Math.abs(dims['chung'].scaledHeight - 200) < 10, 'chung height ~200px');
+  // chung: height should be ~140px
+  assert.ok(Math.abs(dims['chung'].scaledHeight - 140) < 10, 'chung height ~140px');
 
-  // under & construction: height should be ~95px
-  assert.ok(Math.abs(dims['under'].scaledHeight - 96) < 5, 'under height ~96px');
-  assert.ok(Math.abs(dims['construction'].scaledHeight - 98) < 5, 'construction height ~98px');
+  // under & construction: height should be ~68px
+  assert.ok(Math.abs(dims['under'].scaledHeight - 67) < 5, 'under height ~67px');
+  assert.ok(Math.abs(dims['construction'].scaledHeight - 68) < 5, 'construction height ~68px');
 });

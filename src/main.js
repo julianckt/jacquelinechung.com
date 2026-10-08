@@ -4,8 +4,7 @@ import { computeInitialLayout } from './layout-grid.js';
 import { SimulationLifecycleController } from './lifecycle.js';
 import { resolvePointerAction, DEFAULT_PILL_LINKS } from './interaction.js';
 
-// Resolve Matter from global CDN script or ES module
-const Matter = window.Matter;
+import Matter from 'matter-js';
 const { Engine, Runner, Bodies, Composite, Mouse, MouseConstraint, Body, Query } = Matter;
 
 // Configuration
@@ -103,26 +102,27 @@ function renderLoop() {
     const renderH = spec.height * spec.scale;
 
     ctx.drawImage(img, -renderW / 2, -renderH / 2, renderW, renderH);
+    ctx.restore();
 
     // Optional debug wireframe overlay
     if (showWireframes) {
+      ctx.save();
       ctx.strokeStyle = 'rgba(255, 0, 100, 0.8)';
       ctx.lineWidth = 1.5;
       for (const part of body.parts.slice(1)) {
         ctx.beginPath();
         const verts = part.vertices;
         if (verts.length > 0) {
-          ctx.moveTo(verts[0].x - body.position.x, verts[0].y - body.position.y);
+          ctx.moveTo(verts[0].x, verts[0].y);
           for (let i = 1; i < verts.length; i++) {
-            ctx.lineTo(verts[i].x - body.position.x, verts[i].y - body.position.y);
+            ctx.lineTo(verts[i].x, verts[i].y);
           }
           ctx.closePath();
           ctx.stroke();
         }
       }
+      ctx.restore();
     }
-
-    ctx.restore();
   }
 
   requestAnimationFrame(renderLoop);

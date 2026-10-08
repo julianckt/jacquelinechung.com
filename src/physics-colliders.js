@@ -13,12 +13,14 @@ const { Bodies, Body } = Matter;
  */
 export function createCompoundCollider(spec, scale = 1, position = { x: 0, y: 0 }, options = {}) {
   const parts = [];
+  const isStaticRequested = Boolean(options.isStatic);
   const bodyOptions = {
     label: spec.id,
     restitution: 0.3,
     friction: 0.2,
     frictionAir: 0.01,
     ...options,
+    isStatic: false, // Ensure dynamic mass & inertia are computed first
   };
 
   if (spec.type === 'pill') {
@@ -76,6 +78,10 @@ export function createCompoundCollider(spec, scale = 1, position = { x: 0, y: 0 
 
   // Ensure body is centered exactly at requested position
   Body.setPosition(compoundBody, position);
+
+  if (isStaticRequested) {
+    Body.setStatic(compoundBody, true);
+  }
 
   return compoundBody;
 }

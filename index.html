@@ -46,8 +46,14 @@
     <canvas id="physics-canvas"></canvas>
     <div class="debug-hint">Press 'W' to toggle wireframes</div>
 
-    <!-- Matter.js physics library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.20.0/matter.min.js"></script>
+    <!-- Browser Import Map for ES modules -->
+    <script type="importmap">
+    {
+      "imports": {
+        "matter-js": "https://cdn.jsdelivr.net/npm/matter-js@0.20.0/+esm"
+      }
+    }
+    </script>
     <!-- Application module -->
     <script type="module" src="./src/main.js"></script>
 </body>

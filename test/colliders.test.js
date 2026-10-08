@@ -1,5 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import Matter from 'matter-js';
 import { createCompoundCollider } from '../src/physics-colliders.js';
 
 test('creates a pill capsule compound body with 1 central rectangle and 2 end circles', () => {
@@ -58,3 +59,22 @@ test('creates a word compound body with a core rectangle and specified jutting r
   const subParts = body.parts.slice(1);
   assert.equal(subParts.length, 4, 'Word should have 1 core box + 3 jutting boxes');
 });
+
+test('unfreezing a body created with isStatic: true does not produce NaN mass or position', () => {
+  const pillSpec = {
+    id: 'adopt-a-run',
+    type: 'pill',
+    width: 900,
+    height: 140,
+  };
+  const body = createCompoundCollider(pillSpec, 0.5, { x: 300, y: 200 }, { isStatic: true });
+  assert.equal(body.isStatic, true);
+
+  // Unfreeze
+  Matter.Body.setStatic(body, false);
+  assert.equal(body.isStatic, false);
+  assert.ok(Number.isFinite(body.mass), `Mass must be finite, got ${body.mass}`);
+  assert.ok(!Number.isNaN(body.position.x), 'Position x must not be NaN');
+  assert.ok(!Number.isNaN(body.position.y), 'Position y must not be NaN');
+});
+
