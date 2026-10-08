@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jacqueline Chung</title>
+    <meta name="description" content="Jacqueline Chung - Official Website">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #F7E6F2;
+            min-height: 100vh;
+            overflow: hidden;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        #physics-canvas {
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            touch-action: none;
+        }
+
+        .debug-hint {
+            position: fixed;
+            bottom: 12px;
+            right: 16px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: 11px;
+            color: rgba(0, 0, 0, 0.25);
+            pointer-events: none;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="physics-canvas"></canvas>
+    <div class="debug-hint">Press 'W' to toggle wireframes</div>
+
+    <!-- Matter.js physics library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.20.0/matter.min.js"></script>
+    <!-- Application module -->
+    <script type="module" src="./src/main.js"></script>
+</body>
+</html>
