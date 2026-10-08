@@ -209,9 +209,9 @@ export const ELEMENT_DEFINITIONS = {
   'Group 65': {
     id: 'Group 65',
     type: 'pill',
-    title: 'my latest squash resume',
+    title: 'my linkedin',
     svg: 'svgs/Group 65.svg',
-    width: 1019,
+    width: 707,
     height: 140,
     scale: 0.36,
   },
@@ -231,7 +231,7 @@ export const ELEMENT_DEFINITIONS = {
     type: 'pill',
     title: 'squash highlights reel',
     svg: 'svgs/Group 64.svg',
-    width: 1430,
+    width: 1199,
     height: 140,
     scale: 0.36,
   },
@@ -239,15 +239,27 @@ export const ELEMENT_DEFINITIONS = {
 
 /**
  * Returns a dictionary of element IDs with scaled width and height.
- * @returns {Record<string, { id: string, scaledWidth: number, scaledHeight: number }>}
+ * @param {number} [scaleFactor=1.0] - Viewport scaling multiplier
+ * @param {{ minPillHeight?: number }} [options] - Options including min pill height floor
+ * @returns {Record<string, { id: string, scaledWidth: number, scaledHeight: number, scale: number }>}
  */
-export function getScaledDimensions() {
+export function getScaledDimensions(scaleFactor = 1.0, options = {}) {
+  const minPillHeight = options.minPillHeight ?? 34;
   const result = {};
   for (const [id, def] of Object.entries(ELEMENT_DEFINITIONS)) {
+    const targetScale = def.scale * scaleFactor;
+    let effectiveScale = targetScale;
+
+    if (def.type === 'pill') {
+      const minScale = minPillHeight / def.height;
+      effectiveScale = Math.max(targetScale, minScale);
+    }
+
     result[id] = {
       id,
-      scaledWidth: def.width * def.scale,
-      scaledHeight: def.height * def.scale,
+      scaledWidth: def.width * effectiveScale,
+      scaledHeight: def.height * effectiveScale,
+      scale: effectiveScale,
     };
   }
   return result;

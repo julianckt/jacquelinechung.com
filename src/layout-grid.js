@@ -9,6 +9,79 @@ export const ROW_DEFINITIONS = [
   { row: 8, items: ['Group 64'], gap: 0, marginBelow: 0 },
 ];
 
+export const MOBILE_ROW_DEFINITIONS = [
+  { row: 1, items: ['this', 'is1', 'the'], gap: 8, marginBelow: 6 },
+  { row: 2, items: ['website', 'of'], gap: 8, marginBelow: 12 },
+  { row: 3, items: ['jacqueline'], gap: 0, marginBelow: 10 },
+  { row: 4, items: ['chung'], gap: 0, marginBelow: 12 },
+  { row: 5, items: ['and', 'it', 'is2'], gap: 8, marginBelow: 6 },
+  { row: 6, items: ['still', 'under'], gap: 10, marginBelow: 8 },
+  { row: 7, items: ['construction'], gap: 0, marginBelow: 20 },
+  { row: 8, items: ['Group 67'], gap: 0, marginBelow: 10 },
+  { row: 9, items: ['Group 66'], gap: 0, marginBelow: 10 },
+  { row: 10, items: ['Group 65'], gap: 0, marginBelow: 10 },
+  { row: 11, items: ['Group 68'], gap: 0, marginBelow: 10 },
+  { row: 12, items: ['Group 64'], gap: 0, marginBelow: 0 },
+];
+
+/**
+ * Calculates a 2D containment scale factor based on natural bounding box dimensions.
+ *
+ * @param {number} viewportWidth - Viewport width
+ * @param {number} viewportHeight - Viewport height
+ * @param {typeof ROW_DEFINITIONS} rowDefs - Row definitions to measure
+ * @param {Record<string, { scaledWidth: number, scaledHeight: number }>} baseElementSpecs - Base element dimensions
+ * @param {{ paddingX?: number, paddingY?: number, maxScale?: number }} [options]
+ * @returns {number} Scale factor clamped between 0 and maxScale (default 1.0)
+ */
+export function computeContainmentScale(viewportWidth, viewportHeight, rowDefs, baseElementSpecs, options = {}) {
+  const paddingX = options.paddingX ?? 24;
+  const paddingY = options.paddingY ?? 24;
+  const maxScale = options.maxScale ?? 1.0;
+
+  let maxRowWidth = 0;
+  let totalHeight = 0;
+
+  for (let i = 0; i < rowDefs.length; i++) {
+    const def = rowDefs[i];
+    let rowW = 0;
+    let rowH = 0;
+
+    for (let j = 0; j < def.items.length; j++) {
+      const id = def.items[j];
+      const spec = baseElementSpecs[id];
+      if (spec) {
+        rowW += spec.scaledWidth;
+        if (spec.scaledHeight > rowH) {
+          rowH = spec.scaledHeight;
+        }
+      }
+      if (j < def.items.length - 1) {
+        rowW += def.gap;
+      }
+    }
+
+    if (rowW > maxRowWidth) {
+      maxRowWidth = rowW;
+    }
+
+    totalHeight += rowH;
+    if (i < rowDefs.length - 1) {
+      totalHeight += def.marginBelow;
+    }
+  }
+
+  const availableWidth = Math.max(0, viewportWidth - 2 * paddingX);
+  const availableHeight = Math.max(0, viewportHeight - 2 * paddingY);
+
+  const scaleW = maxRowWidth > 0 ? availableWidth / maxRowWidth : 1.0;
+  const scaleH = totalHeight > 0 ? availableHeight / totalHeight : 1.0;
+
+  return Math.min(scaleW, scaleH, maxScale);
+}
+
+
+
 /**
  * Computes the centered-pillared initial layout coordinates for all elements.
  *
@@ -19,7 +92,8 @@ export const ROW_DEFINITIONS = [
  * @returns {Record<string, { id: string, x: number, y: number, width: number, height: number, row: number }>}
  */
 export function computeInitialLayout(viewportWidth, viewportHeight, elementSpecs, options = {}) {
-  const rowDefs = options.rowDefinitions || ROW_DEFINITIONS;
+  const rowDefs = options.rowDefinitions || (viewportWidth < 768 ? MOBILE_ROW_DEFINITIONS : ROW_DEFINITIONS);
+  const scaleFactor = options.scaleFactor ?? 1.0;
   const layout = {};
 
   // 1. Calculate heights and total block height
@@ -38,7 +112,7 @@ export function computeInitialLayout(viewportWidth, viewportHeight, elementSpecs
   for (let i = 0; i < rowDefs.length; i++) {
     totalHeight += rowHeights[i];
     if (i < rowDefs.length - 1) {
-      totalHeight += rowDefs[i].marginBelow;
+      totalHeight += rowDefs[i].marginBelow * scaleFactor;
     }
   }
 
@@ -49,6 +123,8 @@ export function computeInitialLayout(viewportWidth, viewportHeight, elementSpecs
   for (let i = 0; i < rowDefs.length; i++) {
     const def = rowDefs[i];
     const rowH = rowHeights[i];
+    const gap = def.gap * scaleFactor;
+    const marginBelow = def.marginBelow * scaleFactor;
 
     // Compute total row width
     let totalRowWidth = 0;
@@ -57,7 +133,7 @@ export function computeInitialLayout(viewportWidth, viewportHeight, elementSpecs
       const spec = elementSpecs[id];
       totalRowWidth += (spec ? spec.scaledWidth : 0);
       if (j < def.items.length - 1) {
-        totalRowWidth += def.gap;
+        totalRowWidth += gap;
       }
     }
 
@@ -77,11 +153,12 @@ export function computeInitialLayout(viewportWidth, viewportHeight, elementSpecs
         row: def.row,
       };
 
-      currentX += w + def.gap;
+      currentX += w + gap;
     }
 
-    currentY += rowH + def.marginBelow;
+    currentY += rowH + marginBelow;
   }
 
   return layout;
 }
+

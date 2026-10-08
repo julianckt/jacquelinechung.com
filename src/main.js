@@ -1,6 +1,6 @@
 import { ELEMENT_DEFINITIONS, getScaledDimensions } from './elements-data.js';
 import { createCompoundCollider } from './physics-colliders.js';
-import { computeInitialLayout } from './layout-grid.js';
+import { computeInitialLayout, ROW_DEFINITIONS, MOBILE_ROW_DEFINITIONS, computeContainmentScale } from './layout-grid.js';
 import { SimulationLifecycleController } from './lifecycle.js';
 import { resolvePointerAction, DEFAULT_PILL_LINKS } from './interaction.js';
 
@@ -17,8 +17,9 @@ const CONFIG = {
   dragThresholdPx: 5,
   positionIterations: 10,
   velocityIterations: 8,
-  wakeVelocityX: 3,
+  wakeVelocityX: 4,
   wakeAngularVelocity: 0.06,
+  bodyFriction: 0.3,
 };
 
 // State
@@ -26,6 +27,8 @@ let engine, runner, mouseConstraint;
 let canvas, ctx;
 let bodiesMap = {};
 let imagesMap = {};
+let currentDimsMap = {};
+let currentScaleFactor = 1.0;
 let lifecycleController;
 let showWireframes = false;
 let pointerDownPos = null;
@@ -94,16 +97,16 @@ function renderLoop() {
 
   // Draw each element
   for (const [id, body] of Object.entries(bodiesMap)) {
-    const spec = ELEMENT_DEFINITIONS[id];
+    const dims = currentDimsMap[id];
     const img = imagesMap[id];
-    if (!spec || !img) continue;
+    if (!dims || !img) continue;
 
     ctx.save();
     ctx.translate(body.position.x, body.position.y);
     ctx.rotate(body.angle);
 
-    const renderW = spec.width * spec.scale;
-    const renderH = spec.height * spec.scale;
+    const renderW = dims.scaledWidth;
+    const renderH = dims.scaledHeight;
 
     ctx.drawImage(img, -renderW / 2, -renderH / 2, renderW, renderH);
     ctx.restore();
@@ -160,18 +163,31 @@ export async function initApp() {
 
   // 3. Create boundary walls
   const walls = createWalls(width, height);
-  Composite.add(engine.world, Object.values(walls));
+  Composite.add(engine.world, Object.values(walls), { friction: CONFIG.bodyFriction });
 
-  // 4. Compute initial layout for all 18 elements
-  const scaledDims = getScaledDimensions();
-  const initialLayout = computeInitialLayout(width, height, scaledDims);
+  // 4. Compute responsive scale & layout for all 18 elements
+  const isMobile = width < 768;
+  const targetRowDefs = isMobile ? MOBILE_ROW_DEFINITIONS : ROW_DEFINITIONS;
+  const baseDims = getScaledDimensions(1.0);
+  currentScaleFactor = computeContainmentScale(width, height, targetRowDefs, baseDims, {
+    paddingX: isMobile ? 20 : 30,
+    paddingY: isMobile ? 20 : 30,
+  });
+
+  currentDimsMap = getScaledDimensions(currentScaleFactor);
+  const initialLayout = computeInitialLayout(width, height, currentDimsMap, {
+    rowDefinitions: targetRowDefs,
+    scaleFactor: currentScaleFactor,
+  });
 
   // 5. Create compound physics bodies (initially frozen)
   bodiesMap = {};
   for (const [id, spec] of Object.entries(ELEMENT_DEFINITIONS)) {
     const pos = initialLayout[id] || { x: width / 2, y: height / 2 };
-    const body = createCompoundCollider(spec, spec.scale, { x: pos.x, y: pos.y }, {
+    const dims = currentDimsMap[id];
+    const body = createCompoundCollider(spec, dims.scale, { x: pos.x, y: pos.y }, {
       isStatic: true, // Frozen for first 5 seconds or until interaction
+      friction: CONFIG.bodyFriction,
     });
     bodiesMap[id] = body;
     Composite.add(engine.world, body);
@@ -196,13 +212,15 @@ export async function initApp() {
     moveThreshold: CONFIG.moveThresholdPx,
     onWake: () => {
       // Unfreeze all bodies to drop into gravity with subtle dispersal
-      for (const body of Object.values(bodiesMap)) {
+      for (const [id, body] of Object.entries(bodiesMap)) {
         Body.setStatic(body, false);
-        // Random horizontal velocity to avoid orderly piles
-        const vx = (Math.random() - 0.5) * CONFIG.wakeVelocityX;
+        const isPill = ELEMENT_DEFINITIONS[id]?.type === 'pill';
+        const multiplier = isPill ? 5 : 1;
+        // Random horizontal velocity to avoid orderly piles (scaled by layout scale factor)
+        const vx = (Math.random() - 0.5) * CONFIG.wakeVelocityX * multiplier * currentScaleFactor;
         Body.setVelocity(body, { x: vx, y: body.velocity.y });
         // Subtle random angular velocity for natural tilt
-        const va = (Math.random() - 0.5) * CONFIG.wakeAngularVelocity;
+        const va = (Math.random() - 0.5) * CONFIG.wakeAngularVelocity * currentScaleFactor;
         Body.setAngularVelocity(body, va);
       }
     },

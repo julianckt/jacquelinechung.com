@@ -39,3 +39,21 @@ test('getScaledDimensions returns scaled widths and heights matching target text
   assert.ok(Math.abs(dims['under'].scaledHeight - 67) < 5, 'under height ~67px');
   assert.ok(Math.abs(dims['construction'].scaledHeight - 68) < 5, 'construction height ~68px');
 });
+
+test('getScaledDimensions scales dimensions with scaleFactor and enforces pill height floor of 34px', () => {
+  // Test with scaleFactor = 0.5
+  const halfDims = getScaledDimensions(0.5);
+
+  // 'jacqueline': native 340, scale 0.41 -> 340 * 0.41 * 0.5 = 69.7px
+  assert.ok(Math.abs(halfDims['jacqueline'].scaledHeight - 69.7) < 1, 'jacqueline scales down linearly');
+
+  // Pill: native 140, scale 0.36 -> 140 * 0.36 * 0.5 = 25.2px.
+  // BUT minimum floor is 34px, so scaledHeight must be clamped to 34px!
+  assert.equal(halfDims['Group 64'].scaledHeight, 34, 'Group 64 height clamped to minimum 34px floor');
+  assert.equal(halfDims['Group 66'].scaledHeight, 34, 'Group 66 height clamped to minimum 34px floor');
+
+  // Pill width scales in proportion to the clamped height (34 / 140 = 0.242857)
+  const expectedPillScale = 34 / 140;
+  assert.ok(Math.abs(halfDims['Group 64'].scaledWidth - (1199 * expectedPillScale)) < 1, 'Group 64 width scales proportionally with height floor');
+});
+
