@@ -266,12 +266,14 @@ export async function initApp() {
     pointerDownBody = null;
   });
 
-  // 9. Keyboard shortcut: press 'w' to toggle wireframes
+  // 9. Keyboard shortcut: press 'w' to toggle wireframes (commented out for debugging)
+  /*
   window.addEventListener('keydown', (e) => {
     if (e.key === 'w' || e.key === 'W' || e.key === 'd' || e.key === 'D') {
       showWireframes = !showWireframes;
     }
   });
+  */
 
   // 10. Handle window resize
   window.addEventListener('resize', () => {
