@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+    <script>
+        (function () {
+            var pathname = window.location.pathname.toLowerCase();
+            var target = pathname.startsWith('/squash') ? '/squash/' : '/';
+            window.location.replace(target);
+        })();
+    </script>
+    <meta http-equiv="refresh" content="0; url=/">
+    <link rel="stylesheet" href="https://use.typekit.net/jwf5llj.css">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 24px;
+            background-color: #F7E6F2;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            gap: 20px;
+            font-family: "panel-mono", monospace;
+            color: #3D58F2;
+        }
+
+        h1 {
+            font-weight: 700;
+            font-size: 28px;
+            margin: 0;
+            line-height: 1.35;
+            -webkit-text-stroke: 8px #ffffff;
+            paint-order: stroke fill;
+        }
+
+        p {
+            font-size: 16px;
+            margin: 0;
+        }
+
+        a {
+            color: #3D58F2;
+            font-weight: 700;
+            text-decoration: underline;
+        }
+
+        a:hover {
+            color: #04BF8A;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <h1>Redirecting...</h1>
+        <p>If you are not redirected automatically, <a id="fallback-link" href="/">click here</a>.</p>
+    </main>
+
+    <script>
+        // Update the fallback link dynamically based on the path
+        var pathname = window.location.pathname.toLowerCase();
+        var target = pathname.startsWith('/squash') ? '/squash/' : '/';
+        var fallbackLink = document.getElementById('fallback-link');
+        if (fallbackLink) {
+            fallbackLink.setAttribute('href', target);
+        }
+    </script>
+</body>
+
+</html>
