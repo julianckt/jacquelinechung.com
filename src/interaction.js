@@ -6,7 +6,7 @@ export const DEFAULT_PILL_LINKS = {
   'Group 66': 'https://adoptarun.org',
   'Group 65': 'https://www.linkedin.com/in/jacqueline-chung-a3ab57418',
   'Group 68': 'https://instagram.com/jackie_c_',
-  'Group 64': 'https://www.youtube.com/watch?v=CRmIMcUGnLQ',
+  'Group 64': 'https://youtu.be/MszbdKjZAy8?si=nWj8j1u8bxcBVvrl',
 };
 
 /**
